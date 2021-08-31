@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       title: 'Flutter Teste', //icone da app
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.indigo,
       ),
       home: HomePage(),
     );
@@ -33,50 +33,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-  GlobalKey<ScaffoldState> _key = GlobalKey();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo do Caio!'),
+        title: Text('Todo do Caio :D'),
       ),
-      body: ListView.builder(
-        itemCount: widget.todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          final todo = widget.todoList[index];
-          return CheckboxListTile(
-            title: Text(
-              todo.description,
-              style: TextStyle(
-                fontFamily: 'RobotoSlab',
-                color: Colors.lime[900],
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-                letterSpacing: 1.2,
-              ),
-            ),
-            key: Key(todo.description),
-            value: todo.checked,
-            onChanged: (value) {
-              setState(() {
-                todo.checked = value;
-              });
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('hello'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('hello'),
+              Text('hello'),
+              Text('hello'),
+              Container(
+                color: Colors.grey[200],
+                padding: EdgeInsets.all(20.0),
+                child: Text('derere'),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -89,40 +71,28 @@ class Todo {
   Todo({this.description = '', this.checked = false});
 }
 
-Widget titleSection = Container(
-  padding: const EdgeInsets.all(32),
-  child: Row(
-    children: [
-      Expanded(
-        /*1*/
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /*2*/
-            Container(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: const Text(
-                'Oeschinen Lake Campground',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Text(
-              'Kandersteg, Switzerland',
-              style: TextStyle(
-                color: Colors.grey[500],
-              ),
-            ),
-          ],
-        ),
-      ),
-      /*3*/
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      const Text('41'),
-    ],
-  ),
-);
+
+// ListView.builder(
+//         itemCount: widget.todoList.length,
+//         itemBuilder: (BuildContext context, int index) {
+//           final todo = widget.todoList[index];
+//           return CheckboxListTile(
+//             title: Text(
+//               todo.description,
+//               style: TextStyle(
+//                 fontFamily: 'RobotoSlab',
+//                 color: Colors.lime[900],
+//                 fontWeight: FontWeight.w400,
+//                 fontSize: 16,
+//                 letterSpacing: 1.2,
+//               ),
+//             ),
+//             key: Key(todo.description),
+//             value: todo.checked,
+//             onChanged: (value) {
+//               setState(() {
+//                 todo.checked = value;
+//               });
+//             },
+//           );
+//         },
