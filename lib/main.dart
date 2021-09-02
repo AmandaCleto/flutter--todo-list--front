@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Todo.dart';
+
 void main() {
   runApp(App());
 }
@@ -21,7 +23,6 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  final List<Map<String, dynamic>> items = [];
   final List<Todo> todoList = [
     Todo(
       description: 'Andar de Bike',
@@ -74,6 +75,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int sum = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +152,36 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(),
+                            icon: const Icon(Icons.star),
+                            color: Color(0xFF456990),
+                            tooltip: 'aumenta o nível',
+                            onPressed: () {
+                              setState(() {
+                                sum += 1;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'Nível de Exibismo : $sum',
+                            style: TextStyle(
+                                color: Color(0xFF456990),
+                                fontSize: 15.0,
+                                fontFamily: 'RobotoSlab'),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -224,18 +256,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-class Todo {
-  String description;
-  String icon;
-  String complement;
-  bool? checked;
-
-  Todo({
-    this.description = '',
-    this.icon = '',
-    this.complement = '',
-    this.checked = false,
-  });
 }
