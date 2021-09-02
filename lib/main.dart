@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'Todo.dart';
+import 'Stats.dart';
+import 'PersonalStats.dart';
 
 void main() {
   runApp(App());
@@ -77,6 +79,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int sum = 0;
 
+  Stats stats =
+      Stats(profission: 'Desenvolvedor de Softwares', hobby: 'Ciclista');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF1985A1),
+        backgroundColor: const Color(0xFF34817C),
       ),
       body: SafeArea(
         child: Column(
@@ -109,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           border: new Border.all(
-                            color: Color(0xFF1985A1),
+                            color: Color(0xFF34817C),
                             width: 4.0,
                           ),
                         ),
@@ -138,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Icon(
                             Icons.email,
-                            color: Color(0xFF1985A1),
+                            color: Color(0xFF34817C),
                           ),
                           SizedBox(
                             width: 10.0,
@@ -146,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             'caioliveira@gmail.com',
                             style: TextStyle(
-                              color: Color(0xFF1985A1),
+                              color: Color(0xFF34817C),
                               fontSize: 15.0,
                               fontFamily: 'RobotoSlab',
                             ),
@@ -162,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints(),
                             icon: const Icon(Icons.star),
-                            color: Color(0xFF456990),
+                            color: Color(0xFF062726),
                             tooltip: 'aumenta o nível',
                             onPressed: () {
                               setState(() {
@@ -176,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             'Nível de Exibismo : $sum',
                             style: TextStyle(
-                                color: Color(0xFF456990),
+                                color: Color(0xFF062726),
                                 fontSize: 15.0,
                                 fontFamily: 'RobotoSlab'),
                           ),
@@ -195,58 +200,77 @@ class _HomePageState extends State<HomePage> {
                   topRight: Radius.circular(50),
                 ),
                 child: Container(
-                  color: Color(0xFF1985A1),
-                  child: ListView.builder(
-                    padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                    itemCount: widget.todoList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final todo = widget.todoList[index];
-                      return Center(
-                        child: Container(
-                          child: Theme(
-                            child: CheckboxListTile(
-                              title: Text(
-                                todo.description,
-                                style: TextStyle(
-                                  color: Color(0xFF2E2E2E),
-                                  letterSpacing: 1.0,
-                                  fontFamily: 'RobotoSlab',
-                                ),
-                              ),
-                              subtitle: Text(
-                                todo.complement,
-                                style: TextStyle(
-                                  color: Color(0xFFDCDCDD),
-                                  fontFamily: 'RobotoSlab',
-                                ),
-                              ),
-                              secondary: Icon(
-                                IconData(
-                                  int.parse(todo.icon),
-                                  fontFamily: 'MaterialIcons',
-                                ),
-                                color: Color(0xFFC5C3C6),
-                                size: 25,
-                              ),
-                              activeColor: Color(0xFFC5C3C6),
-                              checkColor: Color(0xFF2E2E2E),
-                              key: Key(todo.description),
-                              value: todo.checked,
-                              onChanged: (value) {
-                                setState(() {
-                                  todo.checked = value;
-                                });
-                              },
+                  color: Color(0xFF062726),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+                    child: Column(
+                      children: [
+                        PersonalStats(stats: stats),
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(50),
                             ),
-                            data: ThemeData(
-                                // checked color
-                                primarySwatch: Colors.pink,
-                                // border color
-                                unselectedWidgetColor: Color(0xFFC5C3C6)),
+                            child: Container(
+                              color: Color(0xFF34817C),
+                              child: ListView.builder(
+                                padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                                itemCount: widget.todoList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final todo = widget.todoList[index];
+                                  return Center(
+                                    child: Container(
+                                      child: Theme(
+                                        child: CheckboxListTile(
+                                          title: Text(
+                                            todo.description,
+                                            style: TextStyle(
+                                              color: Color(0xFF2E2E2E),
+                                              letterSpacing: 1.0,
+                                              fontFamily: 'RobotoSlab',
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            todo.complement,
+                                            style: TextStyle(
+                                              color: Color(0xFFDCDCDD),
+                                              fontFamily: 'RobotoSlab',
+                                            ),
+                                          ),
+                                          secondary: Icon(
+                                            IconData(
+                                              int.parse(todo.icon),
+                                              fontFamily: 'MaterialIcons',
+                                            ),
+                                            color: Color(0xFFC5C3C6),
+                                            size: 25,
+                                          ),
+                                          activeColor: Color(0xFFC5C3C6),
+                                          checkColor: Color(0xFF2E2E2E),
+                                          key: Key(todo.description),
+                                          value: todo.checked,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              todo.checked = value;
+                                            });
+                                          },
+                                        ),
+                                        data: ThemeData(
+                                            // checked color
+                                            primarySwatch: Colors.pink,
+                                            // border color
+                                            unselectedWidgetColor:
+                                                Color(0xFFC5C3C6)),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                      );
-                    },
+                      ],
+                    ),
                   ),
                 ),
               ),
