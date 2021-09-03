@@ -35,7 +35,7 @@ class PersonalStats extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[400],
+                  color: Color(0xFFEEB868),
                 ),
               ),
             ),
