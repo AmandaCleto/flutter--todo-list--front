@@ -102,99 +102,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: new Border.all(
-                            color: Color(0xFF34817C),
-                            width: 4.0,
-                          ),
-                        ),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage('assets/hero.jpeg'),
-                          radius: 40.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        'Caio o Oliveira',
-                        style: TextStyle(
-                          color: Color(0xFF2E2E2E),
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2.4,
-                          fontFamily: 'RobotoSlab',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.email,
-                            color: Color(0xFF34817C),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text(
-                            'caioliveira@gmail.com',
-                            style: TextStyle(
-                              color: Color(0xFF34817C),
-                              fontSize: 15.0,
-                              fontFamily: 'RobotoSlab',
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                            icon: const Icon(Icons.star),
-                            color: Color(0xFF062726),
-                            tooltip: 'aumenta o nível',
-                            onPressed: () {
-                              setState(() {
-                                sum += 1;
-                              });
-                            },
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text(
-                            'Nível de Exibismo : $sum',
-                            style: TextStyle(
-                                color: Color(0xFF062726),
-                                fontSize: 15.0,
-                                fontFamily: 'RobotoSlab'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20.0),
+            Text('oii'),
             Expanded(
               flex: 1,
               child: ClipRRect(
@@ -286,6 +194,141 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 300.0,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xFF34817C),
+                ),
+                child: Column(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: new Border.all(
+                                    color: Color(0xFF062726),
+                                    width: 4.0,
+                                  ),
+                                ),
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/hero.jpeg'),
+                                  radius: 40.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                'Caio o Oliveira',
+                                style: TextStyle(
+                                  color: Color(0xFF2E2E2E),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2.4,
+                                  fontFamily: 'RobotoSlab',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.email,
+                                    color: Color(0xFF062726),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    'caioliveira@gmail.com',
+                                    style: TextStyle(
+                                      color: Color(0xFF062726),
+                                      fontSize: 15.0,
+                                      fontFamily: 'RobotoSlab',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    icon: const Icon(Icons.star),
+                                    color: Color(0xFF062726),
+                                    tooltip: 'aumenta o nível',
+                                    onPressed: () {
+                                      setState(() {
+                                        sum += 1;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    'Nível de Exibismo : $sum',
+                                    style: TextStyle(
+                                        color: Color(0xFF062726),
+                                        fontSize: 15.0,
+                                        fontFamily: 'RobotoSlab'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
