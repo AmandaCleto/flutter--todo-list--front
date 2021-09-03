@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'Stats.dart';
 
 class PersonalStats extends StatelessWidget {
-  final Stats stats;
-  PersonalStats({required this.stats});
+  final Stats? stat;
+
+  PersonalStats({this.stat});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Color(0xFF2E2E2E),
-      margin: EdgeInsets.all(30.0),
+      margin: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -18,7 +19,7 @@ class PersonalStats extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Text(
-                stats.profission,
+                stat?.profission ?? '',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class PersonalStats extends StatelessWidget {
             SizedBox(height: 6.0),
             Center(
               child: Text(
-                stats.hobby,
+                stat?.hobby ?? '',
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,

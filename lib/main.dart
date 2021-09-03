@@ -79,8 +79,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int sum = 0;
 
-  Stats stats =
-      Stats(profission: 'Desenvolvedor de Softwares', hobby: 'Ciclista');
+  List<Stats> stats = [
+    Stats(profission: 'Desenvolvedor de Softwares', hobby: 'Ciclista'),
+    Stats(profission: 'Desenvolvedor de Softwares', hobby: 'Ciclista'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -204,72 +206,74 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
                     child: Column(
-                      children: [
-                        PersonalStats(stats: stats),
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                            ),
-                            child: Container(
-                              color: Color(0xFF34817C),
-                              child: ListView.builder(
-                                padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                                itemCount: widget.todoList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final todo = widget.todoList[index];
-                                  return Center(
-                                    child: Container(
-                                      child: Theme(
-                                        child: CheckboxListTile(
-                                          title: Text(
-                                            todo.description,
-                                            style: TextStyle(
-                                              color: Color(0xFF2E2E2E),
-                                              letterSpacing: 1.0,
-                                              fontFamily: 'RobotoSlab',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            todo.complement,
-                                            style: TextStyle(
-                                              color: Color(0xFFDCDCDD),
-                                              fontFamily: 'RobotoSlab',
-                                            ),
-                                          ),
-                                          secondary: Icon(
-                                            IconData(
-                                              int.parse(todo.icon),
-                                              fontFamily: 'MaterialIcons',
-                                            ),
-                                            color: Color(0xFFC5C3C6),
-                                            size: 25,
-                                          ),
-                                          activeColor: Color(0xFFC5C3C6),
-                                          checkColor: Color(0xFF2E2E2E),
-                                          key: Key(todo.description),
-                                          value: todo.checked,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              todo.checked = value;
-                                            });
-                                          },
-                                        ),
-                                        data: ThemeData(
-                                            // checked color
-                                            primarySwatch: Colors.pink,
-                                            // border color
-                                            unselectedWidgetColor:
-                                                Color(0xFFC5C3C6)),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      children: stats
+                          .map((stat) => PersonalStats(stat: stat))
+                          .toList(),
+
+                      // Expanded(
+                      //   child: ClipRRect(
+                      //     borderRadius: BorderRadius.only(
+                      //       topLeft: Radius.circular(50),
+                      //     ),
+                      //     child: Container(
+                      //       color: Color(0xFF34817C),
+                      //       child: ListView.builder(
+                      //         padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                      //         itemCount: widget.todoList.length,
+                      //         itemBuilder: (BuildContext context, int index) {
+                      //           final todo = widget.todoList[index];
+                      //           return Center(
+                      //             child: Container(
+                      //               child: Theme(
+                      //                 child: CheckboxListTile(
+                      //                   title: Text(
+                      //                     todo.description,
+                      //                     style: TextStyle(
+                      //                       color: Color(0xFF2E2E2E),
+                      //                       letterSpacing: 1.0,
+                      //                       fontFamily: 'RobotoSlab',
+                      //                     ),
+                      //                   ),
+                      //                   subtitle: Text(
+                      //                     todo.complement,
+                      //                     style: TextStyle(
+                      //                       color: Color(0xFFDCDCDD),
+                      //                       fontFamily: 'RobotoSlab',
+                      //                     ),
+                      //                   ),
+                      //                   secondary: Icon(
+                      //                     IconData(
+                      //                       int.parse(todo.icon),
+                      //                       fontFamily: 'MaterialIcons',
+                      //                     ),
+                      //                     color: Color(0xFFC5C3C6),
+                      //                     size: 25,
+                      //                   ),
+                      //                   activeColor: Color(0xFFC5C3C6),
+                      //                   checkColor: Color(0xFF2E2E2E),
+                      //                   key: Key(todo.description),
+                      //                   value: todo.checked,
+                      //                   onChanged: (value) {
+                      //                     setState(() {
+                      //                       todo.checked = value;
+                      //                     });
+                      //                   },
+                      //                 ),
+                      //                 data: ThemeData(
+                      //                     // checked color
+                      //                     primarySwatch: Colors.pink,
+                      //                     // border color
+                      //                     unselectedWidgetColor:
+                      //                         Color(0xFFC5C3C6)),
+                      //               ),
+                      //             ),
+                      //           );
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // ],
                     ),
                   ),
                 ),
