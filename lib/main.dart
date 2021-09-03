@@ -12,14 +12,19 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Teste', //icone da app
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        scaffoldBackgroundColor: const Color(0xFFDCDCDD),
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: MaterialApp(
+        title: 'Flutter Todo List', //icone da app
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          scaffoldBackgroundColor: const Color(0xFFDCDCDD),
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
@@ -30,46 +35,46 @@ class HomePage extends StatefulWidget {
       description: 'Andar de Bike',
       icon: '57810',
       complement: 'Ir até a Ufscar',
-      checked: false,
+      checked: true,
     ),
     Todo(
       description: 'Codar ThreeJs',
       icon: '57718',
       checked: false,
     ),
-    Todo(
-      description: 'Assistir Anime',
-      complement: 'Chihayafuru',
-      icon: '58267',
-      checked: true,
-    ),
-    Todo(
-      description: 'Ouvir Música',
-      icon: '58113',
-      checked: false,
-    ),
-    Todo(
-      description: 'Lição da Faculdade',
-      complement: 'Fazer o layout do App',
-      icon: '58713',
-      checked: false,
-    ),
-    Todo(
-      description: 'Dirigir',
-      icon: '61382',
-      checked: false,
-    ),
-    Todo(
-      description: 'Almoçar',
-      icon: '57946',
-      checked: false,
-    ),
-    Todo(
-      description: 'Arrumar o Github',
-      complement: 'Readme e Perfil',
-      icon: '57718',
-      checked: false,
-    ),
+    // Todo(
+    //   description: 'Assistir Anime',
+    //   complement: 'Chihayafuru',
+    //   icon: '58267',
+    //   checked: true,
+    // ),
+    // Todo(
+    //   description: 'Ouvir Música',
+    //   icon: '58113',
+    //   checked: false,
+    // ),
+    // Todo(
+    //   description: 'Lição da Faculdade',
+    //   complement: 'Fazer o layout do App',
+    //   icon: '58713',
+    //   checked: false,
+    // ),
+    // Todo(
+    //   description: 'Dirigir',
+    //   icon: '61382',
+    //   checked: false,
+    // ),
+    // Todo(
+    //   description: 'Almoçar',
+    //   icon: '57946',
+    //   checked: false,
+    // ),
+    // Todo(
+    //   description: 'Arrumar o Github',
+    //   complement: 'Readme e Perfil',
+    //   icon: '57718',
+    //   checked: false,
+    // ),
   ];
 
   @override
@@ -77,12 +82,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final inputController = TextEditingController();
   int sum = 99;
 
   List<Stats> stats = [
     Stats(profission: 'Desenvolvedor de Softwares', hobby: 'Ciclista'),
     Stats(profission: 'Mestre do bilhar', hobby: 'Incrível'),
   ];
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    inputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +121,16 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Crie um novo todo'),
+                  Text(
+                    'Crie um novo todo:',
+                    style: TextStyle(
+                      color: Color(0xFF062726),
+                      letterSpacing: 1.0,
+                      fontFamily: 'RobotoSlab',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                   SizedBox(
                     height: 20.0,
                   ),
@@ -118,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                     shadowColor: Colors.grey[300],
                     child: TextFormField(
+                      controller: inputController,
                       decoration: InputDecoration(
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -131,7 +154,26 @@ class _HomePageState extends State<HomePage> {
                               child: IconButton(
                                 icon: const Icon(Icons.add),
                                 color: Color(0xFFECECEC),
-                                onPressed: () {},
+                                onPressed: () {
+                                  List<Todo>.filled(
+                                      1,
+                                      Todo(
+                                          description: 'Andar de Bike',
+                                          icon: '57810',
+                                          complement: 'Ir até a Ufscar',
+                                          checked: false),
+                                      growable: true);
+                                  // showDialog(
+                                  //   context: context,
+                                  //   builder: (context) {
+                                  //     return AlertDialog(
+                                  //       // Retrieve the text the user has entered by using the
+                                  //       // TextEditingController.
+                                  //       content: Text(inputController.text),
+                                  //     );
+                                  //   },
+                                  // );
+                                },
                               ),
                             ),
                           ),
@@ -142,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         filled: true,
                         fillColor: Color(0xFFECECEC),
-                        hintText: 'Add Item',
+                        hintText: 'Adicione um item',
                         hintStyle: TextStyle(color: Colors.grey[800]),
                       ),
                       validator: (String? value) {
@@ -152,6 +194,13 @@ class _HomePageState extends State<HomePage> {
                         return null;
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Divider(
+                    color: Colors.grey[400],
+                    thickness: 1,
                   ),
                 ],
               ),
