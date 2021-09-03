@@ -102,235 +102,267 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('oii'),
-            Expanded(
-              flex: 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                ),
-                child: Container(
-                  color: Color(0xFF062726),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Column(
-                            children: stats
-                                .map((stat) => PersonalStats(stat: stat))
-                                .toList(),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30.0, 0, 0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(50),
-                              ),
-                              child: Container(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Crie um novo todo'),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    elevation: 10,
+                    borderRadius: BorderRadius.circular(30.0),
+                    shadowColor: Colors.grey[300],
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Ink(
+                              decoration: const ShapeDecoration(
                                 color: Color(0xFF34817C),
-                                child: ListView.builder(
-                                  padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                                  itemCount: widget.todoList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final todo = widget.todoList[index];
-                                    return Center(
-                                      child: Container(
-                                        child: Theme(
-                                          child: CheckboxListTile(
-                                            title: Text(
-                                              todo.description,
-                                              style: TextStyle(
-                                                color: Color(0xFF2E2E2E),
-                                                letterSpacing: 1.0,
-                                                fontFamily: 'RobotoSlab',
-                                              ),
-                                            ),
-                                            subtitle: Text(
-                                              todo.complement,
-                                              style: TextStyle(
-                                                color: Color(0xFFDCDCDD),
-                                                fontFamily: 'RobotoSlab',
-                                              ),
-                                            ),
-                                            secondary: Icon(
-                                              IconData(
-                                                int.parse(todo.icon),
-                                                fontFamily: 'MaterialIcons',
-                                              ),
-                                              color: Color(0xFFC5C3C6),
-                                              size: 25,
-                                            ),
-                                            activeColor: Color(0xFFC5C3C6),
-                                            checkColor: Color(0xFF2E2E2E),
-                                            key: Key(todo.description),
-                                            value: todo.checked,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                todo.checked = value;
-                                              });
-                                            },
-                                          ),
-                                          data: ThemeData(
-                                              // checked color
-                                              primarySwatch: Colors.pink,
-                                              // border color
-                                              unselectedWidgetColor:
-                                                  Color(0xFFC5C3C6)),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                shape: CircleBorder(),
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.add),
+                                color: Color(0xFFECECEC),
+                                onPressed: () {},
                               ),
                             ),
                           ),
                         ),
-                      ],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xFFECECEC),
+                        hintText: 'Add Item',
+                        hintStyle: TextStyle(color: Colors.grey[800]),
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
                     ),
                   ),
-                ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 100.0, 0, 0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(0),
+                        ),
+                        child: Container(
+                          color: Color(0xFF34817C),
+                          child: ListView.builder(
+                            padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                            itemCount: widget.todoList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final todo = widget.todoList[index];
+                              return Center(
+                                child: Container(
+                                  child: Theme(
+                                    child: CheckboxListTile(
+                                      title: Text(
+                                        todo.description,
+                                        style: TextStyle(
+                                          color: Color(0xFF2E2E2E),
+                                          letterSpacing: 1.0,
+                                          fontFamily: 'RobotoSlab',
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        todo.complement,
+                                        style: TextStyle(
+                                          color: Color(0xFFDCDCDD),
+                                          fontFamily: 'RobotoSlab',
+                                        ),
+                                      ),
+                                      secondary: Icon(
+                                        IconData(
+                                          int.parse(todo.icon),
+                                          fontFamily: 'MaterialIcons',
+                                        ),
+                                        color: Color(0xFFC5C3C6),
+                                        size: 25,
+                                      ),
+                                      activeColor: Color(0xFFC5C3C6),
+                                      checkColor: Color(0xFF2E2E2E),
+                                      key: Key(todo.description),
+                                      value: todo.checked,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          todo.checked = value;
+                                        });
+                                      },
+                                    ),
+                                    data: ThemeData(
+                                        // checked color
+                                        primarySwatch: Colors.pink,
+                                        // border color
+                                        unselectedWidgetColor:
+                                            Color(0xFFC5C3C6)),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            Container(
-              height: 300.0,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color(0xFF34817C),
-                ),
-                child: Column(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: new Border.all(
-                                    color: Color(0xFF062726),
-                                    width: 4.0,
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color(0xFFECECEC),
+        ),
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: 300.0,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Color(0xFF34817C),
+                  ),
+                  child: Column(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/hero.png'),
+                                    radius: 35.0,
                                   ),
                                 ),
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage('assets/hero.jpeg'),
-                                  radius: 40.0,
+                                SizedBox(
+                                  height: 20.0,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              Text(
-                                'Caio o Oliveira',
-                                style: TextStyle(
-                                  color: Color(0xFF2E2E2E),
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 2.4,
-                                  fontFamily: 'RobotoSlab',
+                                Text(
+                                  'Caio o Oliveira',
+                                  style: TextStyle(
+                                    color: Color(0xFFECECEC),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.4,
+                                    fontFamily: 'RobotoSlab',
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.email,
-                                    color: Color(0xFF062726),
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text(
-                                    'caioliveira@gmail.com',
-                                    style: TextStyle(
-                                      color: Color(0xFF062726),
-                                      fontSize: 15.0,
-                                      fontFamily: 'RobotoSlab',
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.email,
+                                      color: Color(0xFFEEB868),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    padding: EdgeInsets.zero,
-                                    constraints: BoxConstraints(),
-                                    icon: const Icon(Icons.star),
-                                    color: Color(0xFF062726),
-                                    tooltip: 'aumenta o nível',
-                                    onPressed: () {
-                                      setState(() {
-                                        sum += 1;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text(
-                                    'Nível de Exibismo : $sum',
-                                    style: TextStyle(
-                                        color: Color(0xFF062726),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Text(
+                                      'caioliveira@gmail.com',
+                                      style: TextStyle(
+                                        color: Color(0xFFECECEC),
                                         fontSize: 15.0,
-                                        fontFamily: 'RobotoSlab'),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        fontFamily: 'RobotoSlab',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: BoxConstraints(),
+                                      icon: const Icon(Icons.star),
+                                      color: Color(0xFFEEB868),
+                                      tooltip: 'aumenta o nível',
+                                      onPressed: () {
+                                        setState(() {
+                                          sum += 1;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Text(
+                                      'Nível de Exibismo : $sum',
+                                      style: TextStyle(
+                                          color: Color(0xFFECECEC),
+                                          fontSize: 15.0,
+                                          fontFamily: 'RobotoSlab'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20.0),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 20.0),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
+              ListTile(
+                title: const Text('Item 1'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
