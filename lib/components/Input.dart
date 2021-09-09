@@ -134,10 +134,6 @@ class _InputComponentState extends State<InputComponent> {
   //   this.title = '';
   // }
 
-  final todo = Todo(
-    createdTime: DateTime.now(),
-    title: 'title',
-  );
   // final List<Todo> todoList = [
   //   Todo(
   //     description: 'Andar de Bike',
@@ -173,7 +169,6 @@ class _InputComponentState extends State<InputComponent> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodosProvider>(context);
-    final todoList = provider.todos;
 
     return Container(
       child: Padding(
@@ -236,15 +231,15 @@ class _InputComponentState extends State<InputComponent> {
                           icon: const Icon(Icons.add),
                           color: Color(0xFFECECEC),
                           onPressed: () {
-                            // final todo = Todo(
-                            //   createdTime: DateTime.now(),
-                            //   title: 'Andar de Bike',
-                            //   icon: '12132',
-                            //   isDone: false,
-                            // );
+                            final todo = Todo(
+                              createdTime: DateTime.now(),
+                              title: descriptionInput.text,
+                              icon: '12132',
+                              isDone: false,
+                            );
 
-                            // provider.addTodo(todo);
-                            // // clearText();
+                            provider.addTodo(todo);
+                            // clearText();
                           },
                         ),
                       ),
