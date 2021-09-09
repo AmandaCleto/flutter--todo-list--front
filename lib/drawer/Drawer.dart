@@ -79,28 +79,6 @@ class DrawerComponent extends StatelessWidget {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    padding: EdgeInsets.zero,
-                                    constraints: BoxConstraints(),
-                                    icon: const Icon(Icons.star),
-                                    color: Color(0xFFEEB868),
-                                    tooltip: 'aumenta o nível',
-                                    onPressed: () {},
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text(
-                                    'Nível de Exibismo : 2',
-                                    style: TextStyle(
-                                        color: Color(0xFFECECEC),
-                                        fontSize: 15.0,
-                                        fontFamily: 'RobotoSlab'),
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                         ),

@@ -103,10 +103,10 @@ class ListComponent extends StatelessWidget {
                               },
                             ),
                             data: ThemeData(
-                                // checked color
-                                primarySwatch: Colors.pink,
-                                // border color
-                                unselectedWidgetColor: Color(0xFFC5C3C6)),
+                              primarySwatch: Colors.pink, // checked color
+                              unselectedWidgetColor:
+                                  Color(0xFFC5C3C6), // border color
+                            ),
                           ),
                         ),
                       ),

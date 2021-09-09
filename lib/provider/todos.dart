@@ -7,10 +7,6 @@ class TodosProvider extends ChangeNotifier {
       createdTime: DateTime.now(),
       title: 'Andar de Bike',
     ),
-    Todo(
-      createdTime: DateTime.now(),
-      title: 'Andar de Bike de novo!',
-    ),
   ];
 
   List<Todo> get todos => _todos.toList();
@@ -22,20 +18,17 @@ class TodosProvider extends ChangeNotifier {
 
   void addTodo(Todo todo) {
     _todos.add(todo);
-
     notifyListeners();
   }
 
   void removeTodo(Todo todo) {
     _todos.remove(todo);
-
     notifyListeners();
   }
 
   bool toggleTodoStatus(Todo todo) {
     todo.isDone = !todo.isDone;
     notifyListeners();
-
     return todo.isDone;
   }
 

@@ -65,17 +65,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(50),
-      //   ),
-      //   backgroundColor: const Color(0xFFECECEC),
-      //   onPressed: () => {},
-      //   child: Icon(
-      //     Icons.add,
-      //     color: const Color(0xFF34817C),
-      //   ),
-      // ),
       drawer: DrawerComponent(),
     );
   }
