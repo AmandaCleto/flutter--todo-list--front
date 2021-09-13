@@ -15,7 +15,9 @@ class _ConcludedPageState extends State<ConcludedPage> {
       body: SafeArea(
         child: Column(
           children: [
-            ListComponent(isDone: true),
+            Expanded(
+              child: ListComponent(isDone: true),
+            ),
           ],
         ),
       ),
