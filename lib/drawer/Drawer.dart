@@ -89,23 +89,23 @@ class DrawerComponent extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/concluded');
               },
+              child: const Text('concluídos'),
             ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
               },
+              child: const Text('Lista'),
             ),
           ],
         ),

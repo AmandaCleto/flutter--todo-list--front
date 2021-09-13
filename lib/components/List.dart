@@ -17,7 +17,7 @@ class ListComponent extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: Color(0xFFECECEC),
+            color: Color(0xFFC5C3C6),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               topRight: Radius.zero,
@@ -33,7 +33,7 @@ class ListComponent extends StatelessWidget {
                 topRight: Radius.circular(0),
               ),
               child: Container(
-                color: Color(0xFF34817C),
+                color: Color(0xFFECECEC),
                 child: ListView.builder(
                   padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
                   itemCount: todoList.length,
@@ -94,8 +94,8 @@ class ListComponent extends StatelessWidget {
                                 color: Color(0xFFEEB868),
                                 size: 25,
                               ),
-                              activeColor: Color(0xFFC5C3C6),
-                              checkColor: Color(0xFF2E2E2E),
+                              activeColor: Color(0xFF34817C),
+                              checkColor: Color(0xFFFAFAFA),
                               key: Key(todo.title),
                               value: todo.isDone,
                               onChanged: (value) {

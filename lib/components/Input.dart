@@ -136,7 +136,7 @@ class _InputComponentState extends State<InputComponent> {
               height: 20.0,
             ),
             Divider(
-              color: Colors.grey[400],
+              color: Color(0xFFC5C3C6),
               thickness: 1,
             ),
           ],
