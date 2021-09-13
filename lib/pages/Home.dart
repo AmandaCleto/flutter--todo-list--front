@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../drawer/Drawer.dart';
 
-import 'Concluded.dart';
 import 'Unconcluded.dart';
+import 'Concluded.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage>
               elevation: 0,
             ),
             body: SafeArea(
-              child: ConcludedPage(),
+              child: UnconcludedPage(),
             ),
           ),
           Scaffold(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage>
               backgroundColor: const Color(0xFF34817C),
             ),
             body: SafeArea(
-              child: UnconcludedPage(),
+              child: ConcludedPage(),
             ),
           ),
         ],

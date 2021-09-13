@@ -6,15 +6,32 @@ class TodosProvider extends ChangeNotifier {
     Todo(
       createdTime: DateTime.now(),
       title: 'Andar de Bike',
+      isDone: false,
+    ),
+    Todo(
+      createdTime: DateTime.now(),
+      title: 'Andar de Bike',
+      isDone: false,
+    ),
+    Todo(
+      createdTime: DateTime.now(),
+      title: 'Comprar óculos',
+      isDone: true,
+    ),
+    Todo(
+      createdTime: DateTime.now(),
+      title: 'Terminar SNK',
+      isDone: true,
     ),
   ];
 
   List<Todo> get todos => _todos.toList();
 
-  // List<Todo> get todos => _todos.where((todo) => todo.isDone == false).toList();
+  List<Todo> get todosConcluded =>
+      _todos.where((todo) => todo.isDone == true).toList();
 
-  // List<Todo> get todosCompleted =>
-  //     _todos.where((todo) => todo.isDone == true).toList();
+  List<Todo> get todosUnconcluded =>
+      _todos.where((todo) => todo.isDone == false).toList();
 
   void addTodo(Todo todo) {
     _todos.add(todo);

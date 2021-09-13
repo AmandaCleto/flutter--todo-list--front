@@ -82,7 +82,8 @@ class _InputComponentState extends State<InputComponent> {
                       errorStyle: TextStyle(
                         fontFamily: 'RobotoSlab',
                         fontSize: 12.0,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFC69797),
                       ),
                       helperText: '',
                       isDense: true, // important line

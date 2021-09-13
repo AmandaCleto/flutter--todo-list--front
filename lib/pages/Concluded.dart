@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../components/Input.dart';
 import '../components/List.dart';
 
 class ConcludedPage extends StatefulWidget {
+  const ConcludedPage({Key? key}) : super(key: key);
+
   @override
   _ConcludedPageState createState() => _ConcludedPageState();
 }
@@ -14,8 +15,7 @@ class _ConcludedPageState extends State<ConcludedPage> {
       body: SafeArea(
         child: Column(
           children: [
-            InputComponent(),
-            ListComponent(),
+            ListComponent(isDone: true),
           ],
         ),
       ),

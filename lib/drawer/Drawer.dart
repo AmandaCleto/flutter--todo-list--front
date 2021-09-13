@@ -17,7 +17,7 @@ class DrawerComponent extends StatelessWidget {
               height: 330.0,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Color(0xFF34817C),
+                  color: Color(0xFF2E2E2E),
                 ),
                 child: Column(
                   children: [

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
-
 import '../provider/todos.dart';
 
 class ListComponent extends StatelessWidget {
+  final bool isDone;
+  const ListComponent({Key? key, this.isDone = true}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodosProvider>(context);
-    final todoList = provider.todos;
+    final todosConcludedList = provider.todosConcluded;
+    final todosUnconcludedList = provider.todosUnconcluded;
 
     return Expanded(
       flex: 1,
@@ -36,10 +39,14 @@ class ListComponent extends StatelessWidget {
                 color: Color(0xFFECECEC),
                 child: ListView.builder(
                   padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                  itemCount: todoList.length,
+                  itemCount: isDone
+                      ? todosConcludedList.length
+                      : todosUnconcludedList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final todo = todoList[index];
-                    log('$todo');
+                    final todo = isDone
+                        ? todosConcludedList[index]
+                        : todosUnconcludedList[index];
+
                     return Dismissible(
                       onDismissed: (DismissDirection direction) {
                         provider.removeTodo(todo);
@@ -87,7 +94,6 @@ class ListComponent extends StatelessWidget {
                               ),
                               secondary: Icon(
                                 IconData(
-                                  // int.parse(todo.icon),
                                   int.parse('57585'),
                                   fontFamily: 'MaterialIcons',
                                 ),
