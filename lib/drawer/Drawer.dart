@@ -26,7 +26,7 @@ class DrawerComponent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,6 +116,8 @@ class DrawerComponent extends StatelessWidget {
               child: const Text(
                 'Perfil',
                 style: TextStyle(
+                  fontFamily: 'RobotoSlab',
+                  fontSize: 16.0,
                   color: Color(0xFFECECEC),
                 ),
               ),

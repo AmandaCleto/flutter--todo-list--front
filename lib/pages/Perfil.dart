@@ -159,6 +159,13 @@ class _PerfilPageState extends State<PerfilPage> {
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
                       style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.resolveWith(
+                          (states) {
+                            return states.contains(MaterialState.pressed)
+                                ? Color(0xFF586F7C)
+                                : null;
+                          },
+                        ),
                         padding: MaterialStateProperty.all(
                           EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
                         ),
