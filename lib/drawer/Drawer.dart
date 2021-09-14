@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/person.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PersonProvider>(context);
+    final personData = provider.personData;
+
     return Theme(
       data: Theme.of(context).copyWith(
         canvasColor: Color(0xFF2E2E2E),
@@ -45,7 +50,7 @@ class DrawerComponent extends StatelessWidget {
                                 height: 20.0,
                               ),
                               Text(
-                                'Caio o Oliveira',
+                                personData.name,
                                 style: TextStyle(
                                   color: Color(0xFFECECEC),
                                   fontSize: 20.0,
@@ -67,7 +72,7 @@ class DrawerComponent extends StatelessWidget {
                                     width: 10.0,
                                   ),
                                   Text(
-                                    'caioliveira@gmail.com',
+                                    personData.email,
                                     style: TextStyle(
                                       color: Color(0xFFECECEC),
                                       fontSize: 15.0,

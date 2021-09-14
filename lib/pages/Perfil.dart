@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../model/Persona.dart';
+import '../provider/person.dart';
 
 class PerfilPage extends StatefulWidget {
   const PerfilPage({Key? key}) : super(key: key);
@@ -7,9 +11,30 @@ class PerfilPage extends StatefulWidget {
   _PerfilPageState createState() => _PerfilPageState();
 }
 
+//reencrevendo a classe TextEditingController para o cursor ficar sempre no final
+class TextController extends TextEditingController {
+  TextController({String text: ''}) {
+    this.text = text;
+  }
+
+  set text(String newText) {
+    value = value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty);
+  }
+}
+
 class _PerfilPageState extends State<PerfilPage> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PersonProvider>(context);
+    final personData = provider.personData;
+    final emailInput = TextController(text: personData.email);
+    final nameInput = TextController(text: personData.name);
+
     return Scaffold(
       backgroundColor: Color(0xFF2E2E2E),
       appBar: AppBar(
@@ -28,7 +53,8 @@ class _PerfilPageState extends State<PerfilPage> {
         backgroundColor: const Color(0xFF2E2E2E),
       ),
       body: SafeArea(
-        child: Container(
+        child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,12 +98,18 @@ class _PerfilPageState extends State<PerfilPage> {
                 height: 30.0,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
+                      onChanged: (text) {
+                        TextSelection previousSelection = nameInput.selection;
+                        nameInput.text = text;
+                        nameInput.selection = previousSelection;
+                      },
+                      controller: nameInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
@@ -90,6 +122,12 @@ class _PerfilPageState extends State<PerfilPage> {
                           right: 15,
                           bottom: 0,
                         ),
+                        errorStyle: TextStyle(
+                          fontFamily: 'RobotoSlab',
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFC69797),
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: const BorderSide(
                             color: Color(0xFF34817C),
@@ -101,8 +139,10 @@ class _PerfilPageState extends State<PerfilPage> {
                           ),
                         ),
                         hintText: 'Preencha seu e-mail',
+                        hintStyle: TextStyle(
+                          color: Color(0xFF34817C),
+                        ),
                       ),
-                      initialValue: "Caio o Oliveira",
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
@@ -114,6 +154,8 @@ class _PerfilPageState extends State<PerfilPage> {
                       height: 15.0,
                     ),
                     TextFormField(
+                      onChanged: (text) {},
+                      controller: emailInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
@@ -138,7 +180,6 @@ class _PerfilPageState extends State<PerfilPage> {
                         ),
                         hintText: 'Preencha seu e-mail',
                       ),
-                      initialValue: "caioliveira@gmail.com",
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
@@ -170,7 +211,24 @@ class _PerfilPageState extends State<PerfilPage> {
                           EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Perfil atualizado',
+                                style: TextStyle(
+                                  color: Color(0xFF2E2E2E),
+                                ),
+                              ),
+                              backgroundColor: Color(0xFFDCDCDD),
+                            ),
+                          );
+
+                          provider.updateTodo(
+                              personData, nameInput.text, emailInput.text);
+                        }
+                      },
                       child: const Text('Salvar'),
                     ),
                   ),
