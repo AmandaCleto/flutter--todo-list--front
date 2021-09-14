@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_and_dart/pages/Concluded.dart';
+
 import 'package:provider/provider.dart';
 import '../provider/todos.dart';
 
 import 'pages/Home.dart';
+import 'pages/Perfil.dart';
 
 class App extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class App extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => HomePage(),
-            '/concluded': (context) => ConcludedPage(),
+            '/perfil': (context) => PerfilPage(),
           },
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

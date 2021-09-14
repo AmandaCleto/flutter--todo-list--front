@@ -5,12 +5,12 @@ class TodosProvider extends ChangeNotifier {
   List<Todo> _todos = [
     Todo(
       createdTime: DateTime.now(),
-      title: 'Andar de Bike',
+      title: 'Andar de Bike até a Ufscar',
       isDone: false,
     ),
     Todo(
       createdTime: DateTime.now(),
-      title: 'Andar de Bike',
+      title: 'Almoçar',
       isDone: false,
     ),
     Todo(

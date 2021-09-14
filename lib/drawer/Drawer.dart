@@ -7,14 +7,14 @@ class DrawerComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: Color(0xFFECECEC),
+        canvasColor: Color(0xFF2E2E2E),
       ),
       child: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             Container(
-              height: 330.0,
+              height: 300.0,
               child: DrawerHeader(
                 decoration: BoxDecoration(
                   color: Color(0xFF2E2E2E),
@@ -76,36 +76,49 @@ class DrawerComponent extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.0),
                   ],
                 ),
               ),
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.resolveWith(
+                  (states) {
+                    return states.contains(MaterialState.pressed)
+                        ? Color(0xFF586F7C)
+                        : null;
+                  },
+                ),
+                padding: MaterialStateProperty.all(
+                  EdgeInsets.symmetric(
+                    vertical: 20.0,
+                    horizontal: 20.0,
+                  ),
+                ),
+                backgroundColor: MaterialStateProperty.all(
+                  Color(0xFF34817C),
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                ),
+                alignment: Alignment.centerLeft,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/concluded');
+                Navigator.pushNamed(context, '/perfil');
               },
-              child: const Text('concluídos'),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
+              child: const Text(
+                'Perfil',
+                style: TextStyle(
+                  color: Color(0xFFECECEC),
+                ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: const Text('Lista'),
             ),
           ],
         ),
