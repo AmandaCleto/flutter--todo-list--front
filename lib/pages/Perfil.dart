@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:learning_flutter_and_dart/data/dummy_users.dart';
 import 'package:provider/provider.dart';
 
-import '../model/Persona.dart';
-import '../provider/person.dart';
+import '../model/User.dart';
+import '../provider/users.dart';
 
 class PerfilPage extends StatefulWidget {
   const PerfilPage({Key? key}) : super(key: key);
@@ -28,12 +29,22 @@ class TextController extends TextEditingController {
 class _PerfilPageState extends State<PerfilPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final Map<String, String> _formData = {};
+
+  void _loadFormData(User user) {
+    _formData['id'] = user.id;
+    _formData['name'] = user.name;
+    _formData['email'] = user.email;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PersonProvider>(context);
-    final personData = provider.personData;
-    final emailInput = TextController(text: personData.email);
-    final nameInput = TextController(text: personData.name);
+    final UserProvider users = Provider.of(context);
+
+    _loadFormData(users.byIndex(1));
+    // final userData = provider.userData;
+    // final emailInput = TextController(text: userData.email);
+    // final nameInput = TextController(text: userData.name);
 
     return Scaffold(
       backgroundColor: Color(0xFF2E2E2E),
@@ -104,12 +115,15 @@ class _PerfilPageState extends State<PerfilPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
+                      initialValue: _formData['name'],
                       onChanged: (text) {
-                        TextSelection previousSelection = nameInput.selection;
-                        nameInput.text = text;
-                        nameInput.selection = previousSelection;
+                        // TextSelection previousSelection = nameInput.selection;
+                        // nameInput.text = text;
+                        // nameInput.selection = previousSelection;
                       },
-                      controller: nameInput,
+
+                      onSaved: (value) => _formData['name'] = value!,
+                      // controller: nameInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
@@ -143,7 +157,7 @@ class _PerfilPageState extends State<PerfilPage> {
                           color: Color(0xFF34817C),
                         ),
                       ),
-                      validator: (String? value) {
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
                         }
@@ -154,8 +168,10 @@ class _PerfilPageState extends State<PerfilPage> {
                       height: 15.0,
                     ),
                     TextFormField(
+                      initialValue: _formData['email'],
+                      onSaved: (value) => _formData['email'] = value!,
                       onChanged: (text) {},
-                      controller: emailInput,
+                      // controller: emailInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
@@ -180,7 +196,7 @@ class _PerfilPageState extends State<PerfilPage> {
                         ),
                         hintText: 'Preencha seu e-mail',
                       ),
-                      validator: (String? value) {
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
                         }
@@ -212,7 +228,10 @@ class _PerfilPageState extends State<PerfilPage> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        final isValid = _formKey.currentState!.validate();
+
+                        if (isValid) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
@@ -225,8 +244,12 @@ class _PerfilPageState extends State<PerfilPage> {
                             ),
                           );
 
-                          provider.updateTodo(
-                              personData, nameInput.text, emailInput.text);
+                          Provider.of<UserProvider>(context, listen: false).put(
+                            User(
+                                id: _formData['id'].toString(),
+                                name: _formData['name'].toString(),
+                                email: _formData['email'].toString()),
+                          );
                         }
                       },
                       child: const Text('Salvar'),

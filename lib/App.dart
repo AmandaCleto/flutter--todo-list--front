@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import '../provider/todos.dart';
-import '../provider/person.dart';
+import 'provider/users.dart';
 
 import 'pages/Home.dart';
 import 'pages/Perfil.dart';
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
           create: (context) => TodosProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => PersonProvider(),
+          create: (context) => UserProvider(),
         ),
       ],
       child: GestureDetector(

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/person.dart';
+import '../provider/users.dart';
+import '../model/User.dart';
+
+import '../data/dummy_users.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PersonProvider>(context);
-    final personData = provider.personData;
+    final UserProvider users = Provider.of(context);
+
+    final userData = users.byIndex(1);
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -50,7 +54,7 @@ class DrawerComponent extends StatelessWidget {
                                 height: 20.0,
                               ),
                               Text(
-                                personData.name,
+                                userData.name,
                                 style: TextStyle(
                                   color: Color(0xFFECECEC),
                                   fontSize: 20.0,
@@ -72,7 +76,7 @@ class DrawerComponent extends StatelessWidget {
                                     width: 10.0,
                                   ),
                                   Text(
-                                    personData.email,
+                                    userData.email,
                                     style: TextStyle(
                                       color: Color(0xFFECECEC),
                                       fontSize: 15.0,
