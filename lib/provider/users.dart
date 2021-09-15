@@ -47,12 +47,4 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  //create
-  // void updateUserData(User person, String name, String email) {
-  //   person.name = name;
-  //   person.email = email;
-
-  //   notifyListeners();
-  // }
 }
