@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_and_dart/data/dummy_users.dart';
 import 'package:provider/provider.dart';
 
 import '../model/User.dart';
@@ -10,20 +9,6 @@ class PerfilPage extends StatefulWidget {
 
   @override
   _PerfilPageState createState() => _PerfilPageState();
-}
-
-//reencrevendo a classe TextEditingController para o cursor ficar sempre no final
-class TextController extends TextEditingController {
-  TextController({String text: ''}) {
-    this.text = text;
-  }
-
-  set text(String newText) {
-    value = value.copyWith(
-        text: newText,
-        selection: TextSelection.collapsed(offset: newText.length),
-        composing: TextRange.empty);
-  }
 }
 
 class _PerfilPageState extends State<PerfilPage> {
@@ -37,14 +22,42 @@ class _PerfilPageState extends State<PerfilPage> {
     _formData['email'] = user.email;
   }
 
+  static inputDecoration(hintText) {
+    return InputDecoration(
+      contentPadding: const EdgeInsets.only(
+        left: 0,
+        top: 8,
+        right: 15,
+        bottom: 0,
+      ),
+      errorStyle: TextStyle(
+        fontFamily: 'RobotoSlab',
+        fontSize: 12.0,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFFC69797),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0xFF34817C),
+        ),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0xFFFAFAFA),
+        ),
+      ),
+      hintText: hintText,
+      hintStyle: TextStyle(
+        color: Color(0xFF34817C),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final UserProvider users = Provider.of(context);
 
     _loadFormData(users.byIndex(1));
-    // final userData = provider.userData;
-    // final emailInput = TextController(text: userData.email);
-    // final nameInput = TextController(text: userData.name);
 
     return Scaffold(
       backgroundColor: Color(0xFF2E2E2E),
@@ -106,7 +119,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 ],
               ),
               SizedBox(
-                height: 30.0,
+                height: 5.0,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
@@ -116,47 +129,13 @@ class _PerfilPageState extends State<PerfilPage> {
                   children: [
                     TextFormField(
                       initialValue: _formData['name'],
-                      onChanged: (text) {
-                        // TextSelection previousSelection = nameInput.selection;
-                        // nameInput.text = text;
-                        // nameInput.selection = previousSelection;
-                      },
-
                       onSaved: (value) => _formData['name'] = value!,
-                      // controller: nameInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
                         color: Color(0xFFDCDCDD),
                       ),
-                      decoration: const InputDecoration(
-                        contentPadding: const EdgeInsets.only(
-                          left: 0,
-                          top: 8,
-                          right: 15,
-                          bottom: 0,
-                        ),
-                        errorStyle: TextStyle(
-                          fontFamily: 'RobotoSlab',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFC69797),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0xFF34817C),
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0xFFFAFAFA),
-                          ),
-                        ),
-                        hintText: 'Preencha seu e-mail',
-                        hintStyle: TextStyle(
-                          color: Color(0xFF34817C),
-                        ),
-                      ),
+                      decoration: inputDecoration('Preencha seu nome'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
@@ -170,32 +149,12 @@ class _PerfilPageState extends State<PerfilPage> {
                     TextFormField(
                       initialValue: _formData['email'],
                       onSaved: (value) => _formData['email'] = value!,
-                      onChanged: (text) {},
-                      // controller: emailInput,
                       cursorColor: Color(0xFF34817C),
                       style: TextStyle(
                         fontSize: 18,
                         color: Color(0xFFDCDCDD),
                       ),
-                      decoration: const InputDecoration(
-                        contentPadding: const EdgeInsets.only(
-                          left: 0,
-                          top: 8,
-                          right: 15,
-                          bottom: 0,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0xFF34817C),
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0xFFFAFAFA),
-                          ),
-                        ),
-                        hintText: 'Preencha seu e-mail',
-                      ),
+                      decoration: inputDecoration('Preencha seu e-mail'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'O campo não pode estar vazio';
@@ -209,57 +168,41 @@ class _PerfilPageState extends State<PerfilPage> {
                   ],
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 10.0),
-                  child: Container(
-                    alignment: Alignment.bottomRight,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.resolveWith(
-                          (states) {
-                            return states.contains(MaterialState.pressed)
-                                ? Color(0xFF586F7C)
-                                : null;
-                          },
-                        ),
-                        padding: MaterialStateProperty.all(
-                          EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
-                        ),
-                      ),
-                      onPressed: () {
-                        _formKey.currentState!.save();
-                        final isValid = _formKey.currentState!.validate();
-
-                        if (isValid) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Perfil atualizado',
-                                style: TextStyle(
-                                  color: Color(0xFF2E2E2E),
-                                ),
-                              ),
-                              backgroundColor: Color(0xFFDCDCDD),
-                            ),
-                          );
-
-                          Provider.of<UserProvider>(context, listen: false).put(
-                            User(
-                                id: _formData['id'].toString(),
-                                name: _formData['name'].toString(),
-                                email: _formData['email'].toString()),
-                          );
-                        }
-                      },
-                      child: const Text('Salvar'),
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          _formKey.currentState!.save();
+          final isValid = _formKey.currentState!.validate();
+
+          if (isValid) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Perfil atualizado',
+                  style: TextStyle(
+                    color: Color(0xFF2E2E2E),
+                  ),
+                ),
+                backgroundColor: Color(0xFFEEB868),
+              ),
+            );
+
+            Provider.of<UserProvider>(context, listen: false).put(
+              User(
+                  id: _formData['id'].toString(),
+                  name: _formData['name'].toString(),
+                  email: _formData['email'].toString()),
+            );
+          }
+        },
+        label: const Text('Salvar'),
+        splashColor: Color(0xFF586F7C).withOpacity(1),
+        hoverColor: Color(0xFF586F7C).withOpacity(1),
+        focusColor: Color(0xFF586F7C).withOpacity(1),
+        backgroundColor: Color(0xFF34817C),
       ),
     );
   }
