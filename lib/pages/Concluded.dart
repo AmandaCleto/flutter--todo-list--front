@@ -13,9 +13,9 @@ class _ConcludedPageState extends State<ConcludedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Expanded(
-          child: ListComponent(isDone: true),
-        ),
+        // child: Expanded(
+        child: ListComponent(isDone: true),
+        // ),
       ),
     );
   }

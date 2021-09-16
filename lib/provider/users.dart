@@ -19,18 +19,39 @@ class UserProvider extends ChangeNotifier {
     return _items.values.elementAt(index);
   }
 
+  //verify if no changes has happened
+  bool didChange(User user) {
+    final targetId = _items.containsKey((user.id));
+    bool result = false;
+
+    //exists?
+    if (targetId) {
+      _items.forEach((key, value) {
+        if (key == user.id &&
+            value.name == user.name &&
+            value.email == user.email) {
+          result = true;
+        }
+      });
+    }
+
+    return result;
+  }
+
   //update // create
   void put(User user) {
+    final targetId = _items.containsKey((user.id));
+
     //update
-    if (user.id != null &&
-        user.id.trim().isNotEmpty &&
-        _items.containsKey((user.id))) {
+    if (user.id.trim().isNotEmpty && targetId) {
+      print("update");
       _items.update(
         user.id,
         (_) => User(id: user.id, name: user.name, email: user.email),
       );
     } else {
       //create
+      print("create");
       _items.putIfAbsent(
         id,
         () => User(id: user.id, name: user.name, email: user.email),
@@ -42,9 +63,7 @@ class UserProvider extends ChangeNotifier {
 
   //delete
   void remove(User user) {
-    if (user != null && user.id != null) {
-      _items.remove(user.id);
-      notifyListeners();
-    }
+    _items.remove(user.id);
+    notifyListeners();
   }
 }

@@ -83,7 +83,7 @@ class _InputComponentState extends State<InputComponent> {
                         fontFamily: 'RobotoSlab',
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFFC69797),
+                        color: Colors.red[400],
                       ),
                       helperText: '',
                       isDense: true, // important line
@@ -107,7 +107,7 @@ class _InputComponentState extends State<InputComponent> {
                                 if (_formKey.currentState!.validate()) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Todo adicionado')),
+                                        content: Text('Item adicionado')),
                                   );
                                   final todo = Todo(
                                     createdTime: DateTime.now(),

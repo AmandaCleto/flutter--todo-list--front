@@ -34,7 +34,7 @@ class _PerfilPageState extends State<PerfilPage> {
         fontFamily: 'RobotoSlab',
         fontSize: 12.0,
         fontWeight: FontWeight.bold,
-        color: Color(0xFFC69797),
+        color: Colors.red[300],
       ),
       focusedBorder: UnderlineInputBorder(
         borderSide: const BorderSide(
@@ -44,6 +44,14 @@ class _PerfilPageState extends State<PerfilPage> {
       enabledBorder: UnderlineInputBorder(
         borderSide: const BorderSide(
           color: Color(0xFFFAFAFA),
+        ),
+      ),
+      errorBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.red.shade300),
+      ),
+      focusedErrorBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0xFF34817C),
         ),
       ),
       hintText: hintText,
@@ -176,26 +184,57 @@ class _PerfilPageState extends State<PerfilPage> {
         onPressed: () {
           _formKey.currentState!.save();
           final isValid = _formKey.currentState!.validate();
+          bool didchange;
 
           if (isValid) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  'Perfil atualizado',
-                  style: TextStyle(
-                    color: Color(0xFF2E2E2E),
-                  ),
-                ),
-                backgroundColor: Color(0xFFEEB868),
-              ),
-            );
-
-            Provider.of<UserProvider>(context, listen: false).put(
+            didchange =
+                Provider.of<UserProvider>(context, listen: false).didChange(
               User(
                   id: _formData['id'].toString(),
                   name: _formData['name'].toString(),
                   email: _formData['email'].toString()),
             );
+            print(didchange);
+
+            didchange
+                ?
+                // ignore: unnecessary_statements
+                {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Nenhuma alteração realizada :)',
+                          style: TextStyle(
+                            color: Color(0xFF2E2E2E),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFEEB868),
+                      ),
+                    )
+                  }
+                :
+                // ignore: unnecessary_statements
+                {
+                    Provider.of<UserProvider>(context, listen: false).put(
+                      User(
+                          id: _formData['id'].toString(),
+                          name: _formData['name'].toString(),
+                          email: _formData['email'].toString()),
+                    ),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Perfil atualizado',
+                          style: TextStyle(
+                            color: Color(0xFF2E2E2E),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFEEB868),
+                      ),
+                    )
+                  };
           }
         },
         label: const Text('Salvar'),
