@@ -15,6 +15,13 @@ class _UnconcludedPageState extends State<UnconcludedPage> {
         child: Column(
           children: [
             InputComponent(),
+            SizedBox(
+              height: 20.0,
+            ),
+            Divider(
+              color: Color(0xFFC5C3C6),
+              thickness: 1,
+            ),
             Expanded(
               flex: 1,
               child: Padding(

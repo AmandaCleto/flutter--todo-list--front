@@ -19,14 +19,16 @@ class ListComponent extends StatelessWidget {
         children: [
           isDone == true && todosConcludedList.length == 0 ||
                   isDone == false && todosUnconcludedList.length == 0
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      'Nenhum item encontrado...',
-                      style: TextStyle(
-                        color: Color(0xFF2E2E2E),
-                        fontSize: 16,
+              ? Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        'Nenhum item encontrado...',
+                        style: TextStyle(
+                          color: Color(0xFF2E2E2E),
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
