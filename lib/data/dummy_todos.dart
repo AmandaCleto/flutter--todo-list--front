@@ -5,11 +5,13 @@ final dummy_todos = [
   Todo(
     createdTime: DateTime.now(),
     title: 'Andar de Bike até a Ufscar',
+    description: 'Restaurante',
     isDone: true,
   ),
   Todo(
     createdTime: DateTime.now(),
     title: 'Almoçar',
+    description: '',
     isDone: true,
   ),
 ];

@@ -194,7 +194,6 @@ class _PerfilPageState extends State<PerfilPage> {
                   name: _formData['name'].toString(),
                   email: _formData['email'].toString()),
             );
-            print(didchange);
 
             didchange
                 ?

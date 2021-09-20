@@ -19,23 +19,26 @@ class _InputComponentState extends State<InputComponent>
   final _formKey = GlobalKey<FormState>();
   String _errorMessage = '';
 
+  bool clicked = false;
+  bool itemClicked = true;
+  double _descriptionTopHeight = 15;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   void dispose() {
     itemInput.dispose(); // Clean up the controller when the widget is disposed.
-    // descriptionInput.dispose();
+    descriptionInput.dispose();
     super.dispose();
   }
 
   void clearText() {
     itemInput.clear();
-    // descriptionInput.clear();
+    descriptionInput.clear();
   }
-
-  bool clicked = false;
-
-  bool itemClicked = true;
-
-  double _descriptionTopHeight = 15;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +81,7 @@ class _InputComponentState extends State<InputComponent>
                           color: Colors.grey[600],
                           fontFamily: 'RobotoSlab',
                         ),
-                        // controller: descriptionInput,
+                        controller: descriptionInput,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           border: OutlineInputBorder(
@@ -101,8 +104,7 @@ class _InputComponentState extends State<InputComponent>
                     ),
                   ),
                   Container(
-                    height: 150,
-                    color: Colors.red.withOpacity(0.2),
+                    padding: EdgeInsets.only(bottom: 50),
                     child: TextFormField(
                       controller: itemInput,
                       decoration: InputDecoration(
@@ -153,16 +155,18 @@ class _InputComponentState extends State<InputComponent>
                                     final todo = Todo(
                                       createdTime: DateTime.now(),
                                       title: itemInput.text,
+                                      description: descriptionInput.text,
                                       isDone: false,
                                     );
                                     provider.addTodo(todo);
                                     clearText();
                                   } else {
+                                    clearText();
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           backgroundColor: Color(0xFFC14343),
                                           content: Text(
-                                              'Para adicionar, o campo não pode estar vazio :)')),
+                                              'Para adicionar, o campo item não pode estar vazio :)')),
                                     );
                                   }
                                 },
@@ -174,8 +178,9 @@ class _InputComponentState extends State<InputComponent>
                       onTap: () => {
                         setState(() {
                           _descriptionTopHeight = itemClicked ? 60 : 10;
-
-                          itemClicked = !itemClicked;
+                          if (itemClicked == false) {
+                            itemClicked = true;
+                          }
                         })
                       },
                       validator: (value) {
@@ -191,22 +196,6 @@ class _InputComponentState extends State<InputComponent>
                       },
                     ),
                   ),
-
-                  // Container(
-                  //   height: 40.0,
-                  //   decoration: BoxDecoration(
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.shade400,
-                  //         blurRadius: 10,
-                  //         offset: Offset(1, 1),
-                  //       ),
-                  //     ],
-                  //     borderRadius: BorderRadius.circular(
-                  //       30.0,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
