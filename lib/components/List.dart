@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../provider/todos.dart';
 
 class ListComponent extends StatelessWidget {
@@ -19,14 +20,16 @@ class ListComponent extends StatelessWidget {
         children: [
           isDone == true && todosConcludedList.length == 0 ||
                   isDone == false && todosUnconcludedList.length == 0
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      'Nenhum item encontrado...',
-                      style: TextStyle(
-                        color: Color(0xFF2E2E2E),
-                        fontSize: 16,
+              ? Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        'Nenhum item encontrado...',
+                        style: TextStyle(
+                          color: Color(0xFF2E2E2E),
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
@@ -83,6 +86,15 @@ class ListComponent extends StatelessWidget {
                                   todo.title,
                                   style: TextStyle(
                                     color: Color(0xFF2E2E2E),
+                                    letterSpacing: 1.0,
+                                    fontFamily: 'RobotoSlab',
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  todo.description,
+                                  style: TextStyle(
+                                    color: Colors.grey[500],
+                                    fontSize: 12,
                                     letterSpacing: 1.0,
                                     fontFamily: 'RobotoSlab',
                                   ),

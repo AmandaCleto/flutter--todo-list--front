@@ -1,8 +1,6 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../model/User.dart';
-
 import '../data/dummy_users.dart';
 
 class UserProvider extends ChangeNotifier {
@@ -44,14 +42,12 @@ class UserProvider extends ChangeNotifier {
 
     //update
     if (user.id.trim().isNotEmpty && targetId) {
-      print("update");
       _items.update(
         user.id,
         (_) => User(id: user.id, name: user.name, email: user.email),
       );
     } else {
       //create
-      print("create");
       _items.putIfAbsent(
         id,
         () => User(id: user.id, name: user.name, email: user.email),

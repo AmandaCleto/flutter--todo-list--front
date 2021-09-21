@@ -4,12 +4,20 @@ import '../model/Todo.dart';
 final dummy_todos = [
   Todo(
     createdTime: DateTime.now(),
-    title: 'Andar de Bike até a Ufscar',
-    isDone: true,
+    title: 'Andar de Bike',
+    description: 'Ir até a Ufscar',
+    isDone: false,
   ),
   Todo(
     createdTime: DateTime.now(),
     title: 'Almoçar',
+    description: '12h',
+    isDone: true,
+  ),
+  Todo(
+    createdTime: DateTime.now(),
+    title: 'Estudar Flutter e Dart',
+    description: '',
     isDone: true,
   ),
 ];
